@@ -1,39 +1,40 @@
 import React, { useState } from "react";
 
 export default function Dashboard() {
-  const [jobDescription, setJobDescription] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [keyWords, setKeyWords] = useState("");
+
+  const [joke, setJoke] = useState("");
+  const [firstCharacter, setFirstCharacter] = useState("");
+  const [secondCharacter, setSecondCharacter] = useState("");
+  const [details, setDetails] = useState("");
   const [tone, setTone] = useState("");
   const [numWords, setNumWords] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
 	const handleCopy = () => {
-    navigator.clipboard.writeText(jobDescription);
+    navigator.clipboard.writeText(joke);
     setIsCopied(true);
   };
 
 	const handleSubmit = async (e) => {
     e.preventDefault();
     setIsGenerating(true);
-    const res = await fetch("/api/returnJobDescription", {
+    const res = await fetch("/api/returnJoke", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        jobTitle,
-        industry,
-        keyWords,
+        firstCharacter,
+        secondCharacter,
+        details,
         tone,
         numWords,
       }),
     });
     setIsGenerating(false);
     const data = await res.json();
-    setJobDescription(data.jobDescription.trim());
+    setJoke(data.joke.trim());
   };
 
 	return (
@@ -42,45 +43,45 @@ export default function Dashboard() {
         <div className="">
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="flex flex-col">
-              <label className="sr-only" htmlFor="jobTitle">
-                Job Title
+              <label className="sr-only" htmlFor="firstCharacter">
+							First character
               </label>
               <input
                 type="text"
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="jobTitle"
-                placeholder="Job Title"
-                id="jobTitle"
-                value={jobTitle}
-                onChange={(e) => setJobTitle(e.target.value)}
+                name="firstCharacter"
+                placeholder="First character"
+                id="firstCharacter"
+                value={firstCharacter}
+                onChange={(e) => setFirstCharacter(e.target.value)}
                 required
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="industry" className="sr-only">
-                Industry
+              <label htmlFor="secondCharacter" className="sr-only">
+                Second character
               </label>
               <input
-                value={industry}
-                onChange={(e) => setIndustry(e.target.value)}
+                value={secondCharacter}
+                onChange={(e) => setSecondCharacter(e.target.value)}
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                placeholder="Industry (Optional)"
+                placeholder="Second character (Optional)"
                 type="text"
-                name="industry"
-                id="industry"
+                name="secondCharacter"
+                id="secondCharacter"
               />
             </div>
 						<div className="flex flex-col">
-              <label htmlFor="keywords" className="sr-only">
-                Keywords for AI (Optional)
+              <label htmlFor="details" className="sr-only">
+                Additional details (Optional)
               </label>
               <textarea
                 rows={7}
-                value={keyWords}
-                onChange={(e) => setKeyWords(e.target.value)}
-                name="keyWords"
-                id="keyWords"
-                placeholder="Keywords for AI (Optional)"
+                value={details}
+                onChange={(e) => setDetails(e.target.value)}
+                name="details"
+                id="details"
+                placeholder="Additional details such as situation, location, topic etc. (Optional)"
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             </div>
@@ -96,10 +97,9 @@ export default function Dashboard() {
                 id="tone"
               >
                 <option value="default">Select Tone (Optional)</option>
-                <option value="casual">Casual</option>
-                <option value="friendly">Friendly</option>
-                <option value="professional">Professional</option>
-                <option value="formal">Formal</option>
+                <option value="hilarious">Hilarious</option>
+                <option value="dark humor">Dark humor</option>
+                <option value="boring">Boring</option>
               </select>
             </div>
 						<div className="flex flex-col">
@@ -117,16 +117,16 @@ export default function Dashboard() {
               />
             </div>
             <button
-              className={`bg-blue-600 w-full hover:bg-blue-700 text-white font-bold mt-6 py-2 px-4 rounded
+              className={`bg-indigo-600 w-full hover:bg-indigo-700 text-white font-bold mt-7 py-2 px-4 rounded
                 ${
-                  isGenerating || jobTitle === ""
+                  isGenerating || firstCharacter === ""
                     ? "cursor-not-allowed opacity-50"
                     : ""
                 }`}
               type="submit"
-              disabled={isGenerating || jobTitle === ""}
+              disabled={isGenerating || firstCharacter === ""}
             >
-              {isGenerating ? "Generating..." : "Generate Job Description"}
+              {isGenerating ? "Generating..." : "Generate a joke"}
             </button>
           </form>
         </div>
@@ -137,23 +137,23 @@ export default function Dashboard() {
             </label>
             <textarea
               rows={
-                jobDescription === ""
+                joke === ""
                   ? 7
-                  : jobDescription.split("\\n").length + 12
+                  : joke.split("\\n").length + 18
               }
               name="output"
-              onChange={(e) => setJobDescription(e.target.value)}
-              value={jobDescription}
-              disabled={jobDescription === ""}
+              onChange={(e) => setJoke(e.target.value)}
+              value={joke}
+              disabled={joke === ""}
               id="output"
-              placeholder="AI Generated Job Description"
+              placeholder="AI Generated Joke"
               className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
             />
             <button
               onClick={handleCopy}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 mt-0.5 rounded"
               type="submit"
-              disabled={jobDescription === ""}
+              disabled={joke === ""}
             >
               {isCopied ? "Copied" : "Copy to Clipboard"}
             </button>
