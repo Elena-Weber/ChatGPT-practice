@@ -16,7 +16,7 @@ const generateJoke = async ({
         },
         body: JSON.stringify({
           prompt: `Write a short joke about a ${firstCharacter} 
-          ${secondCharacter ? `and a ${secondCharacter}` : ""} that is around ${
+          ${secondCharacter ? `and a ${secondCharacter}` : ""} that is fewer than ${
             numWords || 200
           } words long in a ${tone || "funny"} tone. ${
             details ? `Incorporate the following details: ${details}.` : ""

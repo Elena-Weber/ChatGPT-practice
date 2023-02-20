@@ -14,11 +14,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={"bg-white min-h-screen"}>
-        <div className="flex flex-col items-center justify-center px-4 py-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-indigo-700">
+        <div className="flex flex-col items-center justify-center px-4 py-5">
+          <h1 className="text-xl md:text-6xl font-bold text-indigo-700">
             AI Joke Generator
           </h1>
-          <p className="mt-3 text-2xl">
+          <p className="mt-3 text-2xl text-neutral-900">
             Create
             <span className="text-2xl font-bold text-indigo-600">
               {" "}

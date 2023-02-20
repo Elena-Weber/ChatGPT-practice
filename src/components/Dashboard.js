@@ -40,7 +40,7 @@ export default function Dashboard() {
 	return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-12 ">
-        <div className="">
+        <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="flex flex-col">
               <label className="sr-only" htmlFor="firstCharacter">
@@ -99,6 +99,7 @@ export default function Dashboard() {
                 <option value="default">Select Tone (Optional)</option>
                 <option value="hilarious">Hilarious</option>
                 <option value="dark humor">Dark humor</option>
+								<option value="sarcastic">Sarcastic</option>
                 <option value="boring">Boring</option>
               </select>
             </div>
