@@ -11,7 +11,7 @@ export default function Home() {
         <title>AI Joke Generator</title>
         <meta name="description" content="AI Joke Generator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon-joke.ico" />
       </Head>
       <main className={"bg-white min-h-screen"}>
         <div className="flex flex-col items-center justify-center px-4 py-5">

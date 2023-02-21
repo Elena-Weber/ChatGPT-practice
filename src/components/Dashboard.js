@@ -127,7 +127,7 @@ export default function Dashboard() {
               type="submit"
               disabled={isGenerating || firstCharacter === ""}
             >
-              {isGenerating ? "Generating..." : "Generate a joke"}
+              {isGenerating ? "Please wait. Generating a joke..." : "Generate a joke"}
             </button>
           </form>
         </div>
