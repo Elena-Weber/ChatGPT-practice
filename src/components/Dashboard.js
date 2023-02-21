@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [isCopied, setIsCopied] = useState(false);
 
 	const handleCopy = () => {
-    navigator.clipboard.writeText(joke);
+    navigator.clipboard.writeText(joke); // copies the joke
     setIsCopied(true);
   };
 
@@ -35,6 +35,7 @@ export default function Dashboard() {
     setIsGenerating(false);
     const data = await res.json();
     setJoke(data.joke.trim());
+    setIsCopied(false);
   };
 
 	return (
