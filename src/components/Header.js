@@ -7,11 +7,12 @@ export default function Header() {
 
   React.useEffect(() => {
     const typed = new Typed(element.current, {
-      strings: ['AI Joke Generator', 'Create <u>jokes</u> in seconds', 'Prolong your life with <u>laughter</u> &#128515;'],
+      strings: ['<span class="text-indigo-500">AI</span> Joke Generator', '<span class="text-indigo-500">Create</span> jokes <span class="text-indigo-500">in seconds</span>', 'Prolong your <span class="text-indigo-500">life</span> with <span class="text-indigo-500"><u>laughter</u><span> &#128515;'],
       typeSpeed: 70,
       loop:true,
       loopCount: Infinity,
       showCursor: true,
+      cursorChar: '🖊️',
       backSpeed: 100,
       backDelay: 700,
     });
